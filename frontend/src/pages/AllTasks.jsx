@@ -10,6 +10,7 @@ const AllTasks = () => {
     id: "",
     title: "",
     desc: "",
+    dueDate: ''
   });
   const headers = {
     id: localStorage.getItem("id"),

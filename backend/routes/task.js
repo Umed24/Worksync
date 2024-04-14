@@ -6,9 +6,10 @@ const { authenticateToken } = require("./auth");
 //create-task
 router.post("/create-task", authenticateToken, async (req, res) => {
   try {
-    const { title, desc } = req.body;
+    const { title, desc, dueDate } = req.body;
+    console.log(dueDate);
     const { id } = req.headers;
-    const newTask = new Task({ title: title, desc: desc });
+    const newTask = new Task({ title: title, desc: desc , date: dueDate});
     const saveTask = await newTask.save();
     const taskId = saveTask._id;
     await User.findByIdAndUpdate(id, { $push: { tasks: taskId._id } });

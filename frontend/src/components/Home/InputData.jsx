@@ -6,9 +6,10 @@ const InputData = ({ InputDiv, setInputDiv, UpdatedData, setUpdatedData }) => {
   const [Data, setData] = useState({
     title: "",
     desc: "",
+    dueDate: ''
   });
   useEffect(() => {
-    setData({ title: UpdatedData.title, desc: UpdatedData.desc });
+    setData({ title: UpdatedData.title, desc: UpdatedData.desc , dueDate: UpdatedData.dueDate});
   }, [UpdatedData]);
 
   const headers = {
@@ -20,18 +21,18 @@ const InputData = ({ InputDiv, setInputDiv, UpdatedData, setUpdatedData }) => {
     setData({ ...Data, [name]: value });
   };
   const submitData = async () => {
-    if (Data.title === "" || Data.desc === "") {
+    if (Data.title === "" || Data.desc === "" || Data.dueDate === '') {
       alert("All fields are required");
     } else {
       await axios.post("http://localhost:1000/api/v2/create-task", Data, {
         headers,
       });
-      setData({ title: "", desc: "" });
+      setData({ title: "", desc: "" ,dueDate:''});
       setInputDiv("hidden");
     }
   };
   const UpdateTask = async () => {
-    if (Data.title === "" || Data.desc === "") {
+    if (Data.title === "" || Data.desc === "" || Data.dueDate === '') {
       alert("All fields are required");
     } else {
       await axios.put(
@@ -45,8 +46,9 @@ const InputData = ({ InputDiv, setInputDiv, UpdatedData, setUpdatedData }) => {
         id: "",
         title: "",
         desc: "",
+        dueDate: ''
       });
-      setData({ title: "", desc: "" });
+      setData({ title: "", desc: "" , dueDate:''});
       setInputDiv("hidden");
     }
   };
@@ -67,11 +69,13 @@ const InputData = ({ InputDiv, setInputDiv, UpdatedData, setUpdatedData }) => {
                 setData({
                   title: "",
                   desc: "",
+                  dueDate:''
                 });
                 setUpdatedData({
                   id: "",
                   title: "",
                   desc: "",
+                  dueDate:''
                 });
               }}
             >
@@ -95,6 +99,14 @@ const InputData = ({ InputDiv, setInputDiv, UpdatedData, setUpdatedData }) => {
             value={Data.desc}
             onChange={change}
           ></textarea>
+          <input
+            type="date"
+            placeholder="dueDate"
+            name="dueDate"
+            className="px-3 py-2 rounded w-full bg-gray-700 my-3"
+            value={Data.dueDate}
+            onChange={change}
+          />
           {UpdatedData.id === "" ? (
             <button
               className="px-3 py-2 bg-blue-400 rounded text-black text-xl font-semibold"

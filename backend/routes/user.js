@@ -36,10 +36,13 @@ router.post("/sign-in", async (req, res) => {
 //Login
 router.post("/log-in", async (req, res) => {
   const { username, password } = req.body;
-  const existingUser = await User.findOne({ username: username });
+  console.log(username,password);
+  const existingUser = await User.findOne({ email: username });
+  console.log (existingUser)
   if (!existingUser) {
-    return res.status(400).json({ message: "Invalid Credentials" });
+     return res.status(400).json({ message: "Invalid Credentials" });
   }
+
   bcrypt.compare(password, existingUser.password, (err, data) => {
     if (data) {
       const authClaims = [{ name: username }, { jti: jwt.sign({}, "tcmTM") }];
