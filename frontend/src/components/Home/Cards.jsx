@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 
 const Cards = ({ home, setInputDiv, data, setUpdatedData }) => {
+  // const [formatdate, setFormatDate] = useState();
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,9 +35,24 @@ const Cards = ({ home, setInputDiv, data, setUpdatedData }) => {
       console.log(error);
     }
   };
-  const handleUpdate = (id, title, desc) => {
+  
+  function manageDate(date){
+    const finaldate = date;
+    const newdate = new Date(finaldate);
+    const year = newdate.getFullYear();
+    const month = (newdate.getMonth() + 1).toString().padStart(2, '0');
+    const day = newdate.getDate().toString().padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+
+  
+  const handleUpdate = (id, title, desc, date) => {
+    const formattDate = manageDate(date);
     setInputDiv("fixed");
-    setUpdatedData({ id: id, title: title, desc: desc });
+    setUpdatedData({ id: id, title: title, desc: desc, dueDate: formattDate });
+    console.log(title,desc,date);
+    // setFormatDate(formattedDate);
   };
 
   const deleteTask = async (id) => {
@@ -59,6 +75,7 @@ const Cards = ({ home, setInputDiv, data, setUpdatedData }) => {
             <div>
               <h3 className="text-xl font-semibold">{items.title}</h3>
               <p className="text-gray-300 my-2">{items.desc}</p>
+              <p className="text-gray-300 my-2">{manageDate(items.date)}</p>
             </div>
             <div className="mt-4 w-full flex items-center">
               <button
@@ -80,7 +97,7 @@ const Cards = ({ home, setInputDiv, data, setUpdatedData }) => {
                 {home !== "false" && (
                   <button
                     onClick={() =>
-                      handleUpdate(items._id, items.title, items.desc)
+                      handleUpdate(items._id, items.title, items.desc, items.date)
                     }
                   >
                     <FaEdit />
