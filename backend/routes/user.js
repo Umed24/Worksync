@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-//SIGN IN APIs
+// YAHA SIGNIN APIs HAI 
 router.post("/sign-in", async (req, res) => {
   try {
     const { username } = req.body;
@@ -33,7 +33,7 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
-//Login
+// yaha Login hai 
 router.post("/log-in", async (req, res) => {
   const { username, password } = req.body;
   console.log(username,password);
