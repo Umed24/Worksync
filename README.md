@@ -12,8 +12,11 @@ Tech Stack Used:
 ## What you can do ?
 <br>
 1) You can create new Tasks 
+<br>
 2) You can update the tasks 
+<br>
 3) Based on priority Manage your important Tasks
+<br>
 4) You can add collabolators which can help you work on same task and manage those tasks simultaneously
 
 ## Available Scripts
