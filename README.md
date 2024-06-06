@@ -9,6 +9,13 @@ Tech Stack Used:
 2) MongoDB
 3) Restful API's
 
+## What you can do ?
+<br>
+1) You can create new Tasks 
+2) You can update the tasks 
+3) Based on priority Manage your important Tasks
+4) You can add collabolators which can help you work on same task and manage those tasks simultaneously
+
 ## Available Scripts
 
 In the project directory, you can run:
